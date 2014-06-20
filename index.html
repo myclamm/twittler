@@ -12,9 +12,11 @@
         var count = 1;
         var $par = $('p');
         $par.text('');
-        var index = streams.home.length - count;
+        var index = streams.home.length - 1;
         //adds a button
+        $("body").prepend("<button class=archives>See Archives</button>")        
         $("body").prepend("<button class=refresh>Update Tweets</button>")
+
         
         while(index >= 0){
           var tweet = streams.home[index];
@@ -27,10 +29,10 @@
           index -= 1;
         };        
         //adds click event to button to display new tweets on top of old ones, newest from top to bottom
-        $("button").on("click",function(){
-          var index = streams.home.length - count;
+        $("button").filter(".refresh").on("click",function(){
+          var index = streams.home.length - 1;
           $("div").remove();
-          while(index >= 0){
+          while(index >= count){
             var tweet = streams.home[index];
             var $tweet = $('<div></div>');
             $tweet.text(': ' + tweet.message +' ('+ tweet.created_at.toLocaleString()+')');
@@ -42,6 +44,21 @@
             count += 1;
           };          
         });
+        //adding a clickhandler for Archive button
+        $("button").filter(".archives").on("click",function(){
+          var index = count;
+          $("div").remove();
+          while(index >= 0){
+            var tweet = streams.home[index];
+            var $tweet = $('<div></div>');
+            $tweet.text(': ' + tweet.message +' ('+ tweet.created_at.toLocaleString()+')');
+            $span = $("<span class=username></span>");
+            $span.text('@'+tweet.user);
+            $tweet.prepend($span);
+            $tweet.appendTo($par);
+            index -= 1;
+          };          
+        })
         //adding a clickhandler for username
         $('.username').on("click",function(){
           $(this).parent("div").append("waa waa wee wa")
