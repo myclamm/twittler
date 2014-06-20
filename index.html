@@ -7,9 +7,11 @@
   <body>
     <p class="newtweets"></p>
     <p class="oldtweets"></p>
+    <p class="usertweets"></p>
     <script>
 
       $(document).ready(function(){
+        $(".usertweets").hide();
         var count = 0;
         var $par = $('.newtweets');
         var $par1 = $(".oldtweets");
@@ -49,6 +51,9 @@
             tempCount += 1;
             
           };
+          //Why do I have to type this twice?
+          setUserNameCss();
+          //Why do I have to type these ^^ twice?
           count += tempCount;
           $("p").filter(".newtweets").show()
           $("p").filter(".oldtweets").hide()                    
@@ -66,14 +71,27 @@
             $tweet.prepend($span);
             $tweet.appendTo($par1);
             index -= 1;
-            $("p").filter(".newtweets").hide()
-            $("p").filter(".oldtweets").show()
-          };          
+          };
+          setUserNameCss();
+          $("p").filter(".newtweets").hide();
+          $("p").filter(".oldtweets").show();          
         })
         //adding a clickhandler for username
-        $('.username').on("click",function(){
-          $(this).parent("div").append("waa waa wee wa")
-        })
+        var setUserNameCss = function(){
+          $(".username").css({"cursor":"pointer"});
+          $('.username').on("mouseenter",function(){
+            $(this).css("font-weight","bold")
+          });
+          $('.username').on("mouseleave",function(){
+            $(this).css("font-weight","normal")
+          });
+          $(".username").on("click",function(){
+            
+            $(".usertweets").toggle();
+          })
+        };
+        setUserNameCss()
+
 
       });
     </script>
