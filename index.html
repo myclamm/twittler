@@ -17,6 +17,15 @@
     <script>
 
       $(document).ready(function(){
+        $roulette = $("<span></span>");
+        $("h1").append($roulette);
+        setInterval(function(){
+        var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16)
+        $("h1").find("span").css({"color": randomColor})
+        var randomTweet =   streams.home[streams.home.length-1].message;
+        $("h1").find("span").text('"'+randomTweet+'"')
+        },3000);
+
         $(".usertweets").hide();
         var count = 0;
         var $par = $('.newtweets');
