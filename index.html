@@ -9,9 +9,10 @@
     <script>
 
       $(document).ready(function(){
+        var count = 1;
         var $par = $('p');
         $par.text('');
-        var index = streams.home.length - 1;
+        var index = streams.home.length - count;
         //adds a button
         $("body").prepend("<button class=refresh>Update Tweets</button>")
         
@@ -27,7 +28,7 @@
         };        
         //adds click event to button to display new tweets on top of old ones, newest from top to bottom
         $("button").on("click",function(){
-          var index = streams.home.length - 1;
+          var index = streams.home.length - count;
           $("div").remove();
           while(index >= 0){
             var tweet = streams.home[index];
@@ -38,8 +39,14 @@
             $tweet.prepend($span);
             $tweet.appendTo($par);
             index -= 1;
+            count += 1;
           };          
-        });  
+        });
+        //adding a clickhandler for username
+        $('.username').on("click",function(){
+          $(this).parent("div").append("waa waa wee wa")
+        })
+
       });
     </script>
   </body>
