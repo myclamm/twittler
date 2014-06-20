@@ -6,14 +6,14 @@
   </head>
   <body>
     <h1 style="border-style:solid">TWITTLER</h1>
-    <p class="newtweets" style="border-style: solid; margin-right: 400px">
+    <p class="newtweets" style="border-style: solid; margin-right: 300px">
 <span style="font-size:50px;font-family:Calibria">Current Tweets</span>
     </p>
 
     <p class="oldtweets">
       <span style="font-family:Calibria;font-size:50px;">Tweet History</span>
     </p>
-    <p class="usertweets" style="border-style: dotted; border-color: brown; margin-right: 400px"></p>
+    <p class="usertweets" style="border-style: dotted; border-color: brown; margin-right: 300px"></p>
     <script>
 
       $(document).ready(function(){
@@ -106,7 +106,11 @@
             var $header = $("<span style='font-size:50px;font-family:calibria'></span>");
             $header.text(thisUser+"'s"+" Tweet Timeline");
             $(".usertweets").append($header);
-
+            if(thisUser=="sharksforcheap"){
+              $(".usertweets").css({"background":"url(http://www.fishingtarget.com/foto/cuba4.jpg)", "background-repeat": "no-repeat","background-size": "cover","padding-bottom":"200px"});           
+            } else {
+              $(".usertweets").css({"background":"white","padding-bottom":"200px"}); 
+            };
             for(var i=streams.users[thisUser].length-1;i>=0;i--){
               var tweet = streams.users[thisUser][i];
               var $tweet = $('<div></div>');
@@ -114,6 +118,7 @@
               $tweet.appendTo(".usertweets")
             }
 
+            
             $(".usertweets").toggle();
             $(".oldtweets").hide();
             $(".newtweets").hide();
